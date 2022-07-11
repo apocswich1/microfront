@@ -1,0 +1,155 @@
+<div class="home clearfix">
+    <div class="home-banner">
+        <div class="section-container margin-content">
+            <div *ngIf="!this.isLoggedIn" class="alert alert-warning">
+                <strong>!Atención!</strong> Hemos cambiado nuestro login. Si ya tenías una sesión iniciada antes de este cambio, por favor, elimina las cookies de tu navegador. Más información <a target="_blank" href="https://confluence.falabella.tech/pages/viewpage.action?spaceKey=PLATFORM&title=Login" class="alert-link">aquí</a>.
+            </div>
+            <span class="section-container-title">Developer Portal</span>
+            <span class="section-container-hightlight"></span>
+            <span class="section-container-subtitle"><strong>Together</strong> we can <strong>create</strong> remarkable customer <strong>experiences</strong></span>
+            <span class="section-container-description">The Falabella Developer Portal lets you explore the endpoints through an easy-to-use interface.</span>
+        </div>
+    </div> 
+
+    <div class="section-columns margin-content clearfix">
+        <div class="column left col-xl-4">
+            <div class="column-title">You’re invited</div>
+            <span class="column-hightlight"></span>
+            <div class="column-text">Falabella invites you to innovate with our APIs. Join the movement and let’s change our customers experiences together!</div>
+        </div>
+        <div class="column left col-xl-4">
+            <div class="column-title">For developers by developers</div>
+            <span class="column-hightlight"></span>
+            <div class="column-text">We understand what you need to bring value to your users. Clear documentation and a sandbox environment will help you get started.</div>
+        </div>
+        <div class="column left col-xl-4">
+            <div class="column-title">We’ll help you succeed</div>
+            <span class="column-hightlight"></span>
+            <div class="column-text">We are focused on building the very best APIs. We’ll look after the complexities of business processes and integration, so you can focus on creating remarkable user experiences.</div>
+        </div>
+    </div>
+    <!--
+    <div class="section-apis text-center">
+        <div class="section-apis-title">APIs</div>
+        <div class="container-button">
+            <button type="button" routerLink="/catalog"  class="btn btn-primary btn-sm">View All Apis</button>
+        </div>
+    </div>
+    -->
+
+    <div class="how-does-ir-work margin-content clearfix text-center">
+        <div class="title">How does it work?</div>
+        <div class="columns">
+            <div class="column left col-xl-4">
+                <span class="colum-icon"><img [src]="getLogoImg()" alt=""></span>
+                <div class="colum-title">1. Join the community</div>
+                <div class="colum-text">Create an account or log in with GitHub.</div>
+            </div>
+            <div class="column left col-xl-4">
+                <span class="colum-icon"><img [src]="getImg2('icono-06.png')" alt=""></span>
+                <div class="colum-title">2. Find the right API for you</div>
+                <div class="colum-text">Explore the API Marketplace and see what our APIs have to offer.</div>
+            </div>
+            <div class="column left col-xl-4">
+                <span class="colum-icon"><img [src]="getImg2('icono-07.png')" alt=""></span>
+                <div class="colum-title">3. Get connected</div>
+                <div class="colum-text">Connect to the Sandbox environment to simulate the APIs.</div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="showcases">
+        <div class="section-container margin-content">
+            <div class="section-container-title">Showcases</div>
+            <div class="section-container-subtitle">Join IKEA and Albert Heijn and offer payment requests to your customers</div>
+            <div class="section-container-description">We have successfully piloted new payment solutions for IKEA and Albert Heijn, using ING’s Payment Request API. Following its success, ING invites you to join and build your next solution with the API.
+            </div>
+            <div class="content-buttons">
+                <button type="button" class="button green">View Showcase</button>
+                <button type="button" class="button white">View All Showcases</button>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="section-news text-center margin-content">
+        <div class="section-news-title">Platform News</div>
+        <div class="row no-gutters">
+            <div class="section-news-boxs col-xl-6 text-left">
+                <div class="box">
+                    <div class="box-date">Aug 9, 2021</div>
+                    <div class="box-title">Features & Fixes</div>
+                    <div class="box-text">
+                        <p>Developer Portal</p>
+                        <p>Fixes:</p>
+                        <ul>
+                            <li>Correction in authenticated session verification.</li>
+                            <li>Correction of redirection in successful and unsuccessful authentication.</li>
+                            <li>Load of proxies assigned to the authenticated user.</li>
+                        </ul>
+                            
+                        <p>Features:</p>
+                        <ul>
+                            <li>The "traffic monitor" report is available.</li>
+                            <li>Report-viewer, config-admin and config-viewer roles are added</li>
+                        </ul>
+
+                    </div>
+                    <!-- <div class="box-read-more">Read More</div> -->
+                </div>
+            </div>
+            <div class="section-news-boxs col-xl-6 text-left">
+                <div class="box">
+                    <div class="box-date">Aug 9, 2021</div>
+                    <div class="box-title">Features & Fixes</div>
+                    <div class="box-text">
+                        <p>Corporate Pipeline</p>
+                        <p>Fixes:</p>
+                        <ul>
+                            <li>Fixed showing Revision in the last stage of the corporate API Management pipeline, when a microservice was deployed.</li>
+                            <li>The Base URL of the Proxy API is displayed in Apigee of the API that was deployed.</li>
+                            <li>Various improvements in traceability in the validate_version stage</li>
+                        </ul>
+                            
+                        <p>Features:</p>
+                        <ul>
+                            <li>The functionality of performing undeploy of all the existing revisions in the environment to be deployed and not only of the previous one, with a -force is incorporated.</li>
+                            <li>The message is added that indicates that the API is not associated with the specified OWNER, when SwaggerHub and the contract pipeline do not match.</li>
+                        </ul>
+
+                    </div>
+                    <!-- <div class="box-read-more">Read More</div> -->
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="container-button">
+            <button type="button" class="btn btn-primary btn-sm">See All News</button>
+        </div>
+        -->
+    </div>
+
+    <div class="our-approach clearfix text-center margin-content">
+        <div class="our-approach-title">Our Approach</div>
+        <div class="clearfix content-info">
+            <div class="left-content text-left left">
+                <div class="text">
+                    <p>We believe innovation is driven by people with the imagination and determination to improve people’s lives. With our Developer Portal we strive to empower people and organisations to realise their vision for a better future.</p>
+                    <p>The Falabella's Corporate Platform Developer Portal is the building block to stimulate innovation and start delivering great services. Become a trusted partner of Falabella and use our platform to create value for your users.</p>
+                    <p>Together with the best engineers from around the world, we’ll continue to expand the capabilities of our platform and provide you with support and guidance.</p>
+                </div>
+            </div>
+            <div class="right-content left">
+                <div class="image"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stay-up-to-date text-center">
+        <div class="title">Helpfull Links</div>
+        <div class="text"><a href="https://confluence.falabella.com/display/PLATFORM/How+To">API Management How To</a></div>
+        <div class="text"><a href="https://confluence.falabella.com/display/PLATFORM/Developer+Portal">Developer Portal FAQs</a></div>
+        <div class="text"><a href="https://confluence.falabella.com/display/PLATFORM/Pipelines">Corporate Pipeline FAQs</a></div>
+    </div>
+
+</div>

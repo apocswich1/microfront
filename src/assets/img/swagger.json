@@ -1,0 +1,383 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Demand Forecasting",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tortor turpis, consequat at pretium eu, finibus non nibh. Quisque efficitur lectus pretium, accumsan nunc et, ultricies mi. Quisque eget elit lorem. Maecenas sem magna, dapibus sed dui vitae, facilisis vestibulum arcu. Vivamus vel blandit lorem. Nam quis mi vitae risus lobortis gravida sit amet eu libero. Maecenas at tellus eget lorem tincidunt imperdiet. In cursus dolor ultrices libero viverra venenatis. Domain: Merchandising Capability: Demand Forecasting",
+    "contact" : {
+      "name" : "Daniel Soto Armijo",
+      "url" : "https://confluence.falabella.com",
+      "email" : "dadsoto@falabella.cl"
+    },
+    "license" : {
+      "name" : "MIT",
+      "url" : "http://opensource.org/licenses/MIT"
+    },
+    "version" : "1.0",
+    "x-consumer-segments" : "This API is addressed to consumers such as Business Analysts, and other capabilities who are related to demand forecasting\n",
+    "x-business-acronym" : "mrch",
+    "x-capability-acronym" : "dmdf"
+  },
+  "servers" : [ {
+    "url" : "https://api-governance-corp.falabella.com/virts/merchandising/mrch-dmdf/1.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "security" : [ {
+    "apiAuthScheme" : [ ]
+  } ],
+  "paths" : {
+    "/shipments/{shipmentId}" : {
+      "get" : {
+        "tags" : [ "Shipment Planning" ],
+        "summary" : "Gets a shipment.",
+        "description" : "Gets the shipment once created or submitted.",
+        "operationId" : "getShipment",
+        "parameters" : [ {
+          "name" : "shipmentId",
+          "in" : "path",
+          "description" : "Shipment Id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/shipment"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/authorizationError"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden to get this Shipment"
+          },
+          "404" : {
+            "description" : "Shipment not found."
+          },
+          "500" : {
+            "description" : "Internal Server Error."
+          },
+          "505" : {
+            "description" : "Not Implemented."
+          },
+          "default" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/shipments" : {
+      "put" : {
+        "tags" : [ "Shipment Planning" ],
+        "summary" : "Updates a shipment.",
+        "description" : "Updates a shipment to be sent",
+        "operationId" : "putShipment",
+        "requestBody" : {
+          "description" : "Shipment to be updated",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/shipment"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Shipment updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/defaultResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Shipment request."
+          },
+          "404" : {
+            "description" : "Shipment not found."
+          },
+          "default" : {
+            "description" : "Shipment updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/defaultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shipment-plans" : {
+      "post" : {
+        "tags" : [ "Shipment Planning" ],
+        "summary" : "Submits a Shipment Plan to the DC.",
+        "description" : "Submits a Shipment Plan to the DC. This enqueues the Shipment previously created to the DC. This is a not reversible action.",
+        "operationId" : "submitShipmentPlan",
+        "requestBody" : {
+          "description" : "The shipment ID to be submitted.",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/shipmentPlan"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Shipment Plan Submitted.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/defaultResponse"
+                }
+              }
+            }
+          }
+        },
+        "callbacks" : {
+          "shipmentPlanCreated" : {
+            "/topic/shipment-plan" : {
+              "get" : {
+                "responses" : {
+                  "200" : {
+                    "description" : "When a new Shipment Plan is created",
+                    "content" : {
+                      "x-event/json" : {
+                        "schema" : {
+                          "$ref" : "#/components/schemas/ShipmentPlanCreated"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "shipmentPlanUpdated" : {
+            "/topic/shipment-plan" : {
+              "get" : {
+                "responses" : {
+                  "200" : {
+                    "description" : "When a new Shipment Plan is created sajksnajks nasjkanjsk",
+                    "content" : {
+                      "x-event/json" : {
+                        "schema" : {
+                          "$ref" : "#/components/schemas/ShipmentPlanCreated"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "shipmentPlan" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "Shipment Plan ID. Is the identifier of the Shipment created previously.",
+            "example" : 1234
+          }
+        }
+      },
+      "defaultResponse" : {
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "description" : "Created or updated response message",
+            "example" : "Saved"
+          }
+        }
+      },
+      "shipment" : {
+        "required" : [ "shipmentId" ],
+        "properties" : {
+          "shipmentId" : {
+            "type" : "integer",
+            "description" : "Shipping Plan Id. Autogenerated by the API.",
+            "example" : 5678
+          },
+          "date" : {
+            "type" : "string",
+            "description" : "Date when the Shipment was created.",
+            "format" : "date"
+          }
+        }
+      },
+      "authorizationError" : {
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "description" : "Not authorized error",
+            "example" : "Not authorized"
+          }
+        }
+      },
+      "ShipmentPlanCreated" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/CorporateEvent"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "data" : {
+              "$ref" : "#/components/schemas/ShipmentPlanCreated_data"
+            }
+          }
+        } ]
+      },
+      "CorporateEvent" : {
+        "required" : [ "capability", "channel", "commerce", "country", "dateTime", "domain", "entityId", "entityType", "eventId", "eventType", "mimeType", "timeStamp", "version" ],
+        "type" : "object",
+        "properties" : {
+          "eventId" : {
+            "type" : "string",
+            "description" : "Event identification. Alphanumeric string formatted as UUID",
+            "format" : "uuid",
+            "example" : "05a1c531-6733-4b98-8410-9dbb3ea416f6"
+          },
+          "eventType" : {
+            "type" : "string",
+            "description" : "Event type in clear representation using past tense verbs",
+            "example" : "logEntryCreated"
+          },
+          "entityId" : {
+            "type" : "string",
+            "description" : "Identification of the entity which is being referenced",
+            "example" : "LogEntry"
+          },
+          "entityType" : {
+            "type" : "string",
+            "description" : "The entity type",
+            "example" : "LogEntry"
+          },
+          "timeStamp" : {
+            "type" : "string",
+            "description" : "Unix epoch indicating event occurrence",
+            "format" : "epoch",
+            "example" : "1526395872"
+          },
+          "dateTime" : {
+            "type" : "string",
+            "description" : "Human readable date/time indicating event occurrence",
+            "format" : "date-time"
+          },
+          "version" : {
+            "type" : "string",
+            "description" : "The event structure version as is defined by the SCA team",
+            "format" : "MajorVersion.minorVersion",
+            "example" : "1.1"
+          },
+          "country" : {
+            "type" : "string",
+            "description" : "Physical location of the business that originated the event.ISO3166-1 alpha-2 formatted country name",
+            "format" : "ISO3166-1",
+            "example" : "CL"
+          },
+          "commerce" : {
+            "type" : "string",
+            "description" : "Name of commerce as it is known",
+            "example" : "Falabella Retail"
+          },
+          "channel" : {
+            "type" : "string",
+            "description" : "Distribution channel that originated the event",
+            "example" : "WEB"
+          },
+          "domain" : {
+            "type" : "string",
+            "description" : "Business domain according the capability map",
+            "example" : "corp"
+          },
+          "capability" : {
+            "type" : "string",
+            "description" : "Domain capability according the capability map",
+            "example" : "whmg"
+          },
+          "mimeType" : {
+            "type" : "string",
+            "description" : "Used to indicate the mime type of the event",
+            "example" : "application/json"
+          }
+        }
+      },
+      "ShipmentPlanCreated_data" : {
+        "required" : [ "shipmentPlanId" ],
+        "type" : "object",
+        "properties" : {
+          "shipmentPlanId" : {
+            "type" : "integer",
+            "description" : "Shipment Plan identificator.",
+            "example" : 1234
+          },
+          "distributionCenter" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "description" : "List of Distribution Centers to ship the gooods.",
+              "example" : "LOF1"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "apiAuthScheme" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    },
+    "callbacks" : {
+      "shipmentLoaded" : {
+        "/sjaka/sanjk" : {
+          "get" : {
+            "responses" : {
+              "200" : {
+                "description" : "When a new Shipment Plan is created",
+                "content" : {
+                  "x-event/json" : {
+                    "schema" : {
+                      "$ref" : "#/components/schemas/ShipmentPlanCreated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-apigee-id" : "schn-mcff"
+}
